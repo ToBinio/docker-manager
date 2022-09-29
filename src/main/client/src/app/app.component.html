@@ -1,3 +1,10 @@
 <input type="text" name="message" id="message" [(ngModel)]="pingMessage">
 <button (click)="sendPing()">click me :)</button>
 <h2>{{pingResponse}}</h2>
+
+<button (click)="requestContainer()">request container</button>
+
+<div *ngFor="let container of containers"><h1>{{container.name}}</h1>
+    <p>State: {{container.containerState}}</p></div>
+
+<button (click)="addContainer()">add Container :)</button>

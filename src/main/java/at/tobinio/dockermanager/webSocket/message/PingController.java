@@ -16,8 +16,6 @@ public class PingController {
     @MessageMapping ("/ping")
     @SendTo ("/topic/ping")
     public Message handlePingMessage(Message message) {
-        System.out.println("ping : " + message.getContent());
         return message;
     }
-
 }

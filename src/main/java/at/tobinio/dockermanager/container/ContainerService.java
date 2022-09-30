@@ -4,8 +4,7 @@ import at.tobinio.dockermanager.webSocket.WebSocketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created: 27.09.2022
@@ -19,10 +18,10 @@ public class ContainerService {
     @Autowired
     private WebSocketService webSocketService;
 
-    private final List<Container> containers;
+    private final Map<String, Container> containers;
 
     public ContainerService() {
-        containers = new ArrayList<>();
+        containers = new HashMap<>();
 
         addContainer(new Container("Test1", ContainerState.BUILDING));
         addContainer(new Container("Test2", ContainerState.HUFF));
@@ -30,11 +29,19 @@ public class ContainerService {
     }
 
     public void addContainer(Container container) {
-        containers.add(container);
+        String uuid = UUID.randomUUID().toString();
+
+        container.setUUID(uuid);
+
+        containers.put(uuid, container);
+    }
+
+    public void removeContainer(String uuid) {
+        containers.remove(uuid);
     }
 
     public Container[] getContainers() {
-        return containers.toArray(new Container[]{});
+        return containers.values().toArray(new Container[]{});
     }
 
     public void sendContainerToEveryBody() {

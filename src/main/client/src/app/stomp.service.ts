@@ -11,7 +11,9 @@ export class StompService {
     stompClient = Stomp.over(new SockJS("http://localhost:8080/websocket"));
 
     connectionState: ConnectionState = ConnectionState.NONE
+
     subscriptionsList: { topic: string, callback: any }[] = [];
+    sendList: { destination: string, body: any }[] = [];
 
     subscribe(topic: string, callback: any) {
         if (this.connectionState == ConnectionState.CONNECTED) {
@@ -32,13 +34,21 @@ export class StompService {
                     for (let subscriptionsListElement of this.subscriptionsList) {
                         this.subscribe(subscriptionsListElement.topic, subscriptionsListElement.callback)
                     }
+
+                    for (let sendListElement of this.sendList) {
+                        this.send(sendListElement.destination, sendListElement.body)
+                    }
                 })
             }
         }
     }
 
     send(destination: string, body: any = {}) {
-        this.stompClient.send(destination, {}, JSON.stringify(body));
+        if (this.connectionState == ConnectionState.CONNECTED) {
+            this.stompClient.send(destination, {}, JSON.stringify(body));
+        } else {
+            this.sendList.push({destination, body});
+        }
     }
 }
 

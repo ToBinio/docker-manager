@@ -12,8 +12,9 @@ public class Container {
     private String name;
     private ContainerState containerState;
     private String UUIDString;
+    private String owner;
 
-    public Container(String name, ContainerState containerState) {
+    public Container(String name, ContainerState containerState, String owner) {
         this.name = name;
         this.containerState = containerState;
         this.UUIDString = UUID.randomUUID().toString();
@@ -44,5 +45,13 @@ public class Container {
 
     public void setUUID(String UUIDString) {
         this.UUIDString = UUIDString;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 }

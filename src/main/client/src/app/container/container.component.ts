@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Container, ContainerState} from "./container";
 import {HttpClient} from "@angular/common/http";
 
@@ -8,7 +8,7 @@ import {HttpClient} from "@angular/common/http";
     styleUrls: ['./container.component.scss']
 })
 export class ContainerComponent {
-    @Input() container: Container = {name: "", containerState: ContainerState.RUNNING, uuid: ""};
+    @Input() container: Container = {name: "", containerState: ContainerState.RUNNING, uuid: "", owner: ""};
 
     constructor(private http: HttpClient) {
     }

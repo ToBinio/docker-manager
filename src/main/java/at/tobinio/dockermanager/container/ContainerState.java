@@ -6,7 +6,5 @@ package at.tobinio.dockermanager.container;
  * @author Tobias Frischmann
  */
 public enum ContainerState {
-    RUNNING,
-    BUILDING,
-    HUFF
+    DOWNLOAD, REMOVING_GARBAGE, RUNNING
 }

@@ -1,11 +1,10 @@
 export enum ContainerState {
-    RUNNING,
-    BUILDING,
-    HUFF
+    DOWNLOAD, REMOVING_GARBAGE, RUNNING
 }
 
 export type Container = {
     name: string,
-    containerState: ContainerState
-    uuid: string;
+    containerState: ContainerState,
+    uuid: string,
+    owner: string
 }
